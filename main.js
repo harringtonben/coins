@@ -22,43 +22,24 @@ function coinCounter (coinValue) {
 
   	var valueinCoins = coinValue * 100;
 
-  	var quarterRemainder = quarterCounter(valueinCoins);
-  	var dimeRemainder = dimeCounter(quarterRemainder);	
-  	var nickelRemainder = nickelCounter(dimeRemainder);
-  	var pennyRemainder = pennyCounter(nickelRemainder);
+    var quarterAmount = 25;
+    var dimeAmount = 10;
+    var nickelAmount = 5;
+    var pennyAmount = 1;
+
+  	var quarterRemainder = newCoinCounter(valueinCoins, quarterAmount, 'quarters');
+  	var dimeRemainder = newCoinCounter(quarterRemainder, dimeAmount, 'dimes');	
+  	var nickelRemainder = newCoinCounter(dimeRemainder, nickelAmount, 'nickels');
+  	var pennyRemainder = newCoinCounter(nickelRemainder, pennyAmount, 'pennies');
 
   return coinPurse;
 }
 
-function quarterCounter (valueinCoins) {
-	var remainder = valueinCoins % 25; 
-	var centsInQuarters = valueinCoins - remainder;
-	var numberOfQuarters = centsInQuarters / 25;
-	coinPurse.quarters = numberOfQuarters;
-	return remainder;
-}
-
-function dimeCounter (quarterRemainder) {
-	var remainder = quarterRemainder % 10; 
-	var centsInDimes = quarterRemainder - remainder;
-	var numberOfDimes = centsInDimes / 10;
-	coinPurse.dimes = numberOfDimes;
-	return remainder;
-}
-
-function nickelCounter (dimeRemainder) {
-	var remainder = dimeRemainder % 5; 
-	var centsInNickels = dimeRemainder - remainder;
-	var numberOfNickels = centsInNickels / 5;
-	coinPurse.nickels = numberOfNickels;
-	return remainder;
-}
-
-function pennyCounter (nickelRemainder) {
-	var remainder = nickelRemainder % 1; 
-	var centsInPennies = nickelRemainder - remainder;
-	var numberOfPennies = centsInPennies / 1;
-	coinPurse.pennies = numberOfPennies;
+function newCoinCounter (valueinCoins, amount, objectValue) {
+	var remainder = valueinCoins % amount; 
+	var centsInCoins = valueinCoins - remainder;
+	var numberOfCoins = centsInCoins / amount;
+	coinPurse[objectValue] = numberOfCoins;
 	return remainder;
 }
 
